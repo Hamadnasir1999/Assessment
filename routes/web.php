@@ -1,11 +1,16 @@
 <?php
 
+use App\Http\Controllers\CustomerOrderController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('products', ProductController::class);
+Route::get('customers/highest-spending', [CustomerOrderController::class, 'highestSpendingCustomer']);
+Route::get('customers/most-orders', [CustomerOrderController::class, 'mostOrdersCustomer']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
