@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Product;
@@ -37,22 +36,20 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Product created successfully.');
     }
 
-    public function show($productCode)
+    public function show(Product $product)
     {
-        $product = Product::where('productCode', $productCode)->firstOrFail();
         return view('products.show', compact('product'));
     }
 
-    public function edit($productCode)
+    public function edit(Product $product)
     {
-        $product = Product::where('productCode', $productCode)->firstOrFail();
         return view('products.edit', compact('product'));
     }
 
-    public function update(Request $request, $productCode)
+    public function update(Request $request, Product $product)
     {
         $request->validate([
-            'productCode' => 'required|string|max:15|unique:products,productCode,' . $productCode . ',productCode',
+            'productCode' => 'required|string|max:15|unique:products,productCode,' . $product->productCode . ',productCode',
             'productName' => 'required|string|max:70',
             'productLine' => 'required|string|max:50',
             'productScale' => 'required|string|max:10',
@@ -63,15 +60,13 @@ class ProductController extends Controller
             'MSRP' => 'required|numeric|between:0,99999999.99',
         ]);
 
-        $product = Product::where('productCode', $productCode)->firstOrFail();
         $product->update($request->all());
 
         return redirect()->route('products.index')->with('success', 'Product updated successfully.');
     }
 
-    public function destroy($productCode)
+    public function destroy(Product $product)
     {
-        $product = Product::where('productCode', $productCode)->firstOrFail();
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');

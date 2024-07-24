@@ -1,12 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
     <h1>Highest Spending Customer</h1>
     @if ($customer)
-        <p><strong>Name:</strong> {{ $customer->name }}</p>
-        <p><strong>Total Spent:</strong> ${{ $customer->orders->sum('amount') }}</p>
+        <p>Name: {{ $customer->name }}</p>
+        <p>Total Spent: ${{ number_format($customer->orders->sum('amount'), 2) }}</p>
     @else
-        <p>No customer data available.</p>
+        <p>No data available.</p>
     @endif
-    <a href="{{ url('/') }}">Back</a>
+</div>
 @endsection

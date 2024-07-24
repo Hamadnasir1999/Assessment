@@ -6,7 +6,7 @@ use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::resource('products', ProductController::class);
 Route::get('customers/highest-spending', [CustomerOrderController::class, 'highestSpendingCustomer']);
