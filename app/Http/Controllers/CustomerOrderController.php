@@ -1,8 +1,8 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
-use App\Models\Order;
 use Illuminate\Http\Request;
 
 class CustomerOrderController extends Controller
